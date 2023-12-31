@@ -1,15 +1,19 @@
 <?php
-
+// 控制器
 namespace app\controller;
 
 use app\BaseController;
-use think\facade\Config;
-use think\facade\Env;
+use app\facade\Util;
+use app\middleware\Auth;
+use app\middleware\Log;
 
 class Index extends BaseController
 {
-    public function index()
+    protected $middleware = [Log::class, Auth::class];
+
+    public function aaa()
     {
-        return Env::get('SMS_CHANNEL');
+        sleep(1);
+        return Util::foo('bbb');
     }
 }

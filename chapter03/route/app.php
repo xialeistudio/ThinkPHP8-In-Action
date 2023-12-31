@@ -10,8 +10,9 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP6!';
+Route::get('hello', function () {
+    return 'hello world';
 });
 
-Route::get('hello/:name', 'index/hello');
+Route::get('hello/:name', 'index/hello')
+    ->middleware(\app\middleware\Auth::class);
