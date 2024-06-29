@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="<?= url('category/index') ?>">分类列表</a>
+                    <a class="nav-link" aria-current="page" href="<?= url('/index/category') ?>">分类列表</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">

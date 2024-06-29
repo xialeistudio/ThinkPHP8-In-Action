@@ -25,7 +25,15 @@
             <td><?= $row['post_id'] ?></td>
             <td><a target="_blank" href="<?= url('/post/detail', ['id' => $row['post_id']]) ?>"><?= $row['title'] ?></a>
             </td>
-            <td><?= $row['status'] ?></td>
+            <td>
+            <?php if ($row['status'] == 1): ?>
+                <span class="badge text-bg-secondary">草稿</span>
+            <?php elseif ($row['status'] == 2): ?>
+                <span class="badge text-bg-success">已发布</span>
+            <?php else: ?>
+                <span class="badge text-bg-warning">未发布</span>
+            <?php endif; ?>
+            </td>
             <td>
                 <?php if ($row['top'] == 1): ?>
                     <span class="badge text-bg-success">置顶</span>
