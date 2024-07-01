@@ -21,7 +21,6 @@
                    placeholder="请输入验证码">
             <div class="ms-2"><?= captcha_img() ?></div>
         </div>
-
     </div>
     <div class="text-center">
         <button type="submit" class="btn btn-primary">登录</button>
