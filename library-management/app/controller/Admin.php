@@ -41,4 +41,31 @@ class Admin extends BaseController
         AdminService::Factory()->logout();
         return redirect('/');
     }
+
+    public function changepwd()
+    {
+        if ($this->isGuest()) {
+            return $this->loginRequired();
+        }
+        return view('changepwd');
+    }
+
+    public function do_changepwd()
+    {
+        if ($this->isGuest()) {
+            return $this->loginRequired();
+        }
+        $data = \request()->post();
+        try {
+            $this->validate($data, [
+                'old_password|旧密码' => 'require|max:40',
+                'new_password|新密码' => 'require|max:40',
+                'confirm_password|确认密码' => 'require|confirm:new_password'
+            ]);
+            AdminService::Factory()->changePwd($this->adminId(), $data['old_password'], $data['new_password']);
+            return $this->success('修改成功', '/');
+        } catch (Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
 }

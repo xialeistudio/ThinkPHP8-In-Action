@@ -44,17 +44,6 @@ class AdminService extends BaseObject
     }
 
     /**
-     * 日志列表
-     * @param int $adminId
-     * @param int $size
-     * @return Paginator
-     */
-    public function logs($adminId, $size = 10)
-    {
-        return Repository::ModelFactory(AdminLog::class)->listByPage($size, ['admin_id' => $adminId], [], ['log_id' => 'desc']);
-    }
-
-    /**
      * 登录
      * @param string $username
      * @param string $password

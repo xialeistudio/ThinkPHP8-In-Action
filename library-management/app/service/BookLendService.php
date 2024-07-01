@@ -73,12 +73,12 @@ class BookLendService extends BaseObject
             ->listBySearch($size, [], null, null, [
                 'book' => function (Query $query) use ($keyword) {
                     if (!empty($keyword)) {
-                        $query->whereLike(['isbn','title','author','publisher'], $keyword, 'OR');
+                        $query->whereLike('isbn|title|author|publisher', $keyword, 'OR');
                     }
                 },
                 'user' => function (Query $query) use ($keyword) {
                     if (!empty($keyword)) {
-                        $query->whereLike(['realname','phone'], $keyword, 'OR');
+                        $query->whereLike('realname|phone', $keyword, 'OR');
                     }
                 }
             ], ['created_at' => 'desc']);
@@ -93,9 +93,9 @@ class BookLendService extends BaseObject
      * @param $ip
      * @return mixed
      */
-    public function update($bookId, $userId, array $data, $adminId, $ip)
+    public function update($bookId, $userId, $adminId, $ip, array $data)
     {
-        $data = ArrayHelper::filter($data, ['remark']);
+        $data = ArrayHelper::filter($data, ['lending_date', 'should_return_date', 'remark']);
         return Db::transaction(function () use ($bookId, $userId, $data, $adminId, $ip) {
             $lend = Repository::ModelFactory(BookLending::class)->findOne(['book_id' => $bookId, 'user_id' => $userId]);
             if (empty($lend)) {

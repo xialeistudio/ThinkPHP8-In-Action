@@ -27,11 +27,11 @@ class BookLending extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class, 'book_id', 'book_id')->setEagerlyType(0);
+        return $this->belongsTo(Book::class, 'book_id', 'book_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'user_id')->setEagerlyType(0);
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

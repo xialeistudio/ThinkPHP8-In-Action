@@ -55,6 +55,7 @@
                 <td><?= $item['updated_at'] ?></td>
                 <td>
                     <a href="<?= url('/book/edit', ['id' => $item['book_id']]) ?>">编辑</a>
+                    <a href="<?= url('/book/logs', ['id' => $item['book_id']]) ?>">日志</a>
                 </td>
             </tr>
         <?php endforeach; ?>

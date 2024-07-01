@@ -83,4 +83,17 @@ class Book extends BaseController
         BookService::Factory()->update($bookId, $data, $this->adminId(), request()->ip());
         return $this->success('编辑成功', '/');
     }
+
+    public function logs()
+    {
+        if ($this->isGuest()) {
+            return $this->loginRequired();
+        }
+        $bookId = request()->get('id');
+        $logs = BookService::Factory()->getBookLogs($bookId);
+        return view('logs', [
+            'list' => $logs->all(),
+            'page' => $logs->render()
+        ]);
+    }
 }

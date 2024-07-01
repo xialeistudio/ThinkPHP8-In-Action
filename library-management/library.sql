@@ -63,7 +63,7 @@ CREATE TABLE `book_book_log`
     INDEX `idx_book_id` (`book_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
-CREATE TABLE `blog_user`
+CREATE TABLE `book_user`
 (
     `user_id`    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `realname`   varchar(20) NOT NULL,

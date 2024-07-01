@@ -88,23 +88,6 @@ abstract class AbstractRepository extends BaseObject
     }
 
     /**
-     * 分页数据
-     * @param int $size
-     * @param array $conditions
-     * @param array $with
-     * @param array $orderBy
-     * @param array $excludeFields
-     * @return Paginator
-     * @throws DbException
-     */
-    public function listByPage($size = 10, array $conditions = [], $with = [], $orderBy = [])
-    {
-        $className = $this->modelClass();
-        $query = $className::where($conditions)->with($with)->order($orderBy);
-        return $query->paginate($size);
-    }
-
-    /**
      * 搜索列表
      * @param int $size
      * @param array $condition
@@ -123,10 +106,14 @@ abstract class AbstractRepository extends BaseObject
         if (!empty($keyword) && !empty($column)) {
             $query->whereLike($column, '%' . $keyword . '%');
         }
-        if(!empty($condition)) {
+        if (!empty($condition)) {
             $query->where($condition);
         }
-        return $query->paginate($size);
+        return $query->paginate([
+            'query' => request()->get(), //url额外参数
+            'var_page' => 'page', //分页变量
+            'list_rows' => $size, //每页数量
+        ]);
     }
 
     /**

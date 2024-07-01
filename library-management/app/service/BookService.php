@@ -60,6 +60,18 @@ class BookService extends BaseObject
     }
 
     /**
+     * 获取书籍日志
+     * @param $bookId
+     * @param $size
+     * @return Paginator
+     * @throws \think\db\exception\DbException
+     */
+    public function getBookLogs($bookId, $size = 10)
+    {
+        return Repository::ModelFactory(BookLog::class)->listBySearch($size, ['book_id' => $bookId]);
+    }
+
+    /**
      * 查找书籍
      * @param int $bookId
      * @return Book
