@@ -1,0 +1,28 @@
+<layout name="layout/user"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/user.index/index')}">个人中心</a></li>
+        <li class="breadcrumb-item active" aria-current="page">收藏列表</li>
+    </ol>
+</nav>
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>主题</td>
+        <td>收藏时间</td>
+        <td>操作</td>
+    </tr>
+    <volist name="list" id="item">
+        <tr>
+            <td>
+                <a href="{:url('/index/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.topic.title}</a>
+            </td>
+            <td>{$item.created_at}</td>
+            <td>
+                <a href="{:url('delete',['topic_id'=>$item['topic_id']])}" onclick="return confirm('确定操作吗?')">删除</a>
+            </td>
+        </tr>
+    </volist>
+</table>
+<nav class="mt-2">
+    {$list->render()|raw}
+</nav>

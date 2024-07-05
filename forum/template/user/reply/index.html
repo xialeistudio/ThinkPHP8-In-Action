@@ -1,0 +1,36 @@
+<layout name="layout/user"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/user.index/index')}">个人中心</a></li>
+        <li class="breadcrumb-item active" aria-current="page">回复列表</li>
+    </ol>
+</nav>
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>ID</td>
+        <td>主题</td>
+        <td>发表时间</td>
+        <td>编辑时间</td>
+        <td>查看/回复</td>
+        <td>版块</td>
+        <td>回复时间</td>
+    </tr>
+    <volist name="list" id="item">
+        <tr>
+            <td>{$item.reply_id}</td>
+            <td>
+                <a href="{:url('/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.topic.title}</a>
+            </td>
+            <td>{$item.topic.created_at}</td>
+            <td>{$item.topic.updated_at}</td>
+            <td>{$item.topic.view_count}/{$item.topic.reply_count}</td>
+            <td>
+                <a href="{:url('/forum/show',['id'=>$item['forum_id']])}" target="_blank">{$item.forum.title}</a>
+            </td>
+            <td>{$item.created_at}</td>
+        </tr>
+    </volist>
+</table>
+<nav class="mt-2">
+    {$list->render()|raw}
+</nav>

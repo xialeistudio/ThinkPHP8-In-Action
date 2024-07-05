@@ -87,7 +87,10 @@ class TopicRepository extends Repository
         }
 
         $query->order(['top' => 'desc', 'topic_id' => 'desc']);
-        return $query->paginate($size);
+        return $query->paginate([
+            'list_rows' => $size,
+            'query' => request()->get()
+        ]);
     }
 
     /**
@@ -102,7 +105,10 @@ class TopicRepository extends Repository
         $query = Topic::where('user_id', $userId);
         $query->with(['forum']);
         $query->order(['topic_id' => 'desc']);
-        return $query->paginate($size);
+        return $query->paginate([
+            'list_rows' => $size,
+            'query' => request()->get()
+        ]);
     }
 
     /**

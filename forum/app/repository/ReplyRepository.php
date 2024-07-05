@@ -58,8 +58,11 @@ class ReplyRepository extends Repository
             'topic',
             'forum'
         ]);
-        $query->field('content', true);
-        return $query->paginate($size);
+        $query->withoutField(['content']);
+        return $query->paginate([
+            'list_rows' => $size,
+            'query' => request()->get()
+        ]);
     }
 
     /**

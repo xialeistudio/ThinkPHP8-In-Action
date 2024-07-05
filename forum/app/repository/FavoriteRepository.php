@@ -32,6 +32,9 @@ class FavoriteRepository extends Repository
         $query = Favorite::where('user_id', $userId);
         $query->with(['topic']);
         $query->order(['created_at' => 'desc']);
-        return $query->paginate($size);
+        return $query->paginate([
+            'list_rows' => $size,
+            'query' => request()->get()
+        ]);
     }
 }

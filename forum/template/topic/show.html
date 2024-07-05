@@ -71,11 +71,10 @@
                 </eq>
             </eq>
         </notempty>
-        <hr>
 
     </div>
 </div>
-
+<hr>
 <volist name="replies" id="reply">
     <div class="row">
         <div class="col-md-2">
@@ -111,6 +110,8 @@
             <div class="content">{$reply.content|raw}</div>
         </div>
     </div>
+    <hr>
+
 </volist>
 <nav class="mt-2">
     {$replies->render()|raw}

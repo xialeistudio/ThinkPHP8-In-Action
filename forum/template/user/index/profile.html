@@ -1,0 +1,39 @@
+<layout name="layout/user"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/user.index/index')}">个人中心</a></li>
+        <li class="breadcrumb-item active" aria-current="page">编辑资料</li>
+    </ol>
+</nav>
+<form action="{:url('do_profile')}" method="post" class="mt-2 col-md-4" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="username" class="form-label">账号</label>
+        <input type="text" name="username" id="username" disabled value="{$user.username}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">密码</label>
+        <input type="password" name="password" id="password" placeholder="为空则不修改" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="nickname" class="form-label">昵称</label>
+        <input type="text" name="nickname" id="nickname" class="form-control" value="{$user.nickname}">
+    </div>
+    <div class="mb-3">
+        <label for="avatar" class="form-label">头像</label>
+        <img src="{$user.avatar|raw}" width="64" class="mb-1">
+        <input type="file" class="form-control" accept="image/*" name="avatar" id="avatar" placeholder="请上传头像">
+    </div>
+    <div class="mb-3">
+        <label for="score" class="form-label">积分</label>
+        <input type="text" name="score" id="score" value="{$user.score}" disabled class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="thread_count" class="form-label">帖子数</label>
+        <input type="text" name="thread_count" id="thread_count" value="{$user.thread_count}" disabled class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="login_at" class="form-label">最近登录时间</label>
+        <input type="text" name="login_at" id="login_at" value="{$Request.session.user.login.login_at|default=date('Y-m-d H:i:s',$user['login_at'])}" disabled class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary px-4 rounded-pill">保存</button>
+</form>

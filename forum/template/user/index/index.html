@@ -1,0 +1,24 @@
+<layout name="layout/user"/>
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>ID</td>
+        <td>主题</td>
+        <td>版块</td>
+        <td>发表时间</td>
+        <td>编辑时间</td>
+        <td>查看/回复</td>
+    </tr>
+    <volist name="topics" id="item">
+        <tr>
+            <td>{$item.topic_id}</td>
+            <td><a href="{:url('/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.title}</a></td>
+            <td><a href="{:url('/forum/show',['id'=>$item['forum_id']])}" target="_blank">{$item.forum.title}</a></td>
+            <td>{$item.created_at}</td>
+            <td>{$item.updated_at}</td>
+            <td>{$item.view_count}/{$item.reply_count}</td>
+        </tr>
+    </volist>
+</table>
+<nav class="mt-2">
+    {$topics->render()|raw}
+</nav>

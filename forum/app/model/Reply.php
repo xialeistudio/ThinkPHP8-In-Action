@@ -26,6 +26,7 @@ use think\model\concern\SoftDelete;
 class Reply extends Model
 {
     use SoftDelete;
+    protected $pk = 'reply_id';
     protected $autoWriteTimestamp = true;
     protected $createTime         = 'created_at';
     protected $updateTime         = 'updated_at';

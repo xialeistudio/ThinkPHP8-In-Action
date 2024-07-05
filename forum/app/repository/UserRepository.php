@@ -57,6 +57,9 @@ class UserRepository extends Repository
             $query->where('nickname|username', 'like', '%' . $keyword . '%');
         }
         $query->order(['user_id' => 'desc']);
-        return $query->paginate($size);
+        return $query->paginate([
+            'list_rows' => $size,
+            'query' => request()->get()
+        ]);
     }
 }
