@@ -1,0 +1,74 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item active" aria-current="page">帖子管理</li>
+    </ol>
+</nav>
+<div class="d-flex align-items-center justify-content-between mt-2">
+    <form action="" class="row flex-fill" method="get">
+        <div class="col">
+            <select name="forum_id" id="forum_id" class="form-control">
+                <option value="0">全部版块</option>
+                <volist name="forums" id="forum">
+                    <option value="{$forum.forum_id}"
+                    <eq name="Request.get.forum_id" value="$forum.forum_id">selected</eq>>
+                    {$forum.title}</option>
+                </volist>
+            </select>
+        </div>
+        <div class="col">
+            <input type="search" class="form-control" placeholder="帖子标题模糊搜索" id="keyword" name="keyword"
+                   value="{$Request.get.keyword|raw}">
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-pill px-4" type="submit">筛选</button>
+            <a class="btn btn-secondary rounded-pill" href="<?=url('/admin.topic/index')?>">所有帖子</a>
+        </div>
+    </form>
+</div>
+<hr>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>作者</th>
+        <th>时间</th>
+        <th>查看/回复</th>
+        <th>版块</th>
+        <th>置顶</th>
+    </tr>
+    <volist name="list" id="item">
+        <tr>
+            <td>{$item.topic_id}</td>
+            <td>
+                <a href="{:url('/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.title}</a>
+            </td>
+            <td>{$item.user.username}/
+                <empty name="item.user.nickname">
+                    无昵称
+                    <else/>
+                    {$item.user.nickname}
+                </empty>
+            </td>
+            <td>
+                发表: {$item.created_at} <br>
+                编辑: {$item.updated_at}
+            </td>
+            <td>{$item.view_count}/{$item.reply_count}</td>
+            <td>
+                <a href="{:url('/forum/show',['id'=>$item['forum_id']])}" target="_blank">{$item.forum.title}</a>
+            </td>
+            <td>
+                <eq name="item.top" value="1">
+                    <span class="label label-success">置顶</span>
+                    <else/>
+                    <span class="label label-default">未置顶</span>
+                </eq>
+            </td>
+        </tr>
+    </volist>
+</table>
+<nav class="mt-2">
+    {$list->render()|raw}
+</nav>

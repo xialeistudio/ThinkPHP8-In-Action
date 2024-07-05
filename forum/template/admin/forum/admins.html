@@ -1,0 +1,33 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/admin.forum/index')}">版块管理</a></li>
+        <li class="breadcrumb-item active" aria-current="page">版主管理</li>
+    </ol>
+</nav>
+
+<p>
+    <a href="{:url('/admin.forum/bind_admin',['id'=>$Request.get.id])}" class="btn btn-primary rounded-pill btn-sm">添加版主</a>
+</p>
+<div class="row">
+    <volist name="list" id="item">
+        <div class="col-md-3 border p-2 rounded d-flex justify-content-between">
+            <div class="me-2">
+                <img src="{$item.user.avatar|raw}" width="64" height="64" alt="">
+            </div>
+            <div class=flex-fill>
+                <div>
+                    <empty name="item.user.nickname">
+                        未设置昵称
+                        <else/>
+                        {$item.user.nickname}
+                    </empty>
+                </div>
+                <div>ID:{$item.user.user_id}</div>
+                <div><a onclick="return confirm('确认操作吗?')" href="{:url('/admin.forum/unbind_admin',['id'=>$Request.get.id,'user_id'=>$item['user_id']])}">解绑</a>
+                </div>
+            </div>
+        </div>
+    </volist>
+</div>

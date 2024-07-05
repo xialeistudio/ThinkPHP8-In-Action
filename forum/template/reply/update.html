@@ -1,0 +1,29 @@
+<layout name="layout/main"/>
+<link rel="stylesheet" href="/static/richtexteditor/rte_theme_default.css"/>
+<script type="text/javascript" src="/static/richtexteditor/rte.js"></script>
+<script type="text/javascript" src='/static/richtexteditor/plugins/all_plugins.js'></script>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/')}">首页</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/forum/show',['id'=>$reply['forum']['forum_id']])}">{$reply.forum.title}</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/topic/show',['id'=>$reply['topic_id']])}">{$reply.topic.title}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">编辑回复</li>
+    </ol>
+</nav>
+<form action="{:url('/reply/do_update',['id'=>$reply['reply_id']])}" method="post" class="mt-2">
+    <div class="mb-3">
+        <label for="title" class="form-label">标题</label>
+        <input type="text" readonly class="form-control" value="Re: {$reply.topic.title}" id="title" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">内容</label>
+        <textarea name="content" id="content" required class="form-control">{$reply.content|raw}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary px-4 rounded-pill">提交</button>
+</form>
+<script src="/static/js/site.js"></script>
+<script>
+    var editor1cfg = {}
+    editor1cfg.toolbar = "basic";
+    var editor1 = new RichTextEditor("#content", editor1cfg);
+</script>

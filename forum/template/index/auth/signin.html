@@ -1,0 +1,25 @@
+<layout name="layout/main"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">登录</li>
+    </ol>
+</nav>
+<form action="{:request()->url()}" method="post" class="m-auto mt-5 col-4">
+    <fieldset>
+        <legend>登录</legend>
+        <div class="mb-3">
+            <label for="username" class="form-label">账号</label>
+            <input type="text" class="form-control" name="username" id="username" required placeholder="请输入账号"
+                   maxlength="20">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" class="form-control" name="password" id="password" required placeholder="请输入密码"
+                   maxlength="20">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+    </fieldset>
+</form>

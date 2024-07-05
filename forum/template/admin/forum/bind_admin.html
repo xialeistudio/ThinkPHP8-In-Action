@@ -1,0 +1,38 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/admin.forum/index')}">版块管理</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/admin.forum/admins',['id'=>$Request.get.id])}">版主管理</a></li>
+        <li class="breadcrumb-item active" aria-current="page">添加版主</li>
+    </ol>
+</nav>
+
+<empty name="users">
+    <p>暂无用户可以绑定。</p>
+    <else/>
+    <div class="row">
+        <volist name="users" id="user">
+            <div class="col-md-3 d-flex justify-content-between border rounded px-2">
+                <div class="me-2">
+                    <img src="{$user.avatar|raw}" class="img-with-placeholder media-object" width="64" height="64" alt="">
+                </div>
+                <div class="flex-fill">
+                    <div>
+                        <empty name="user.nickname">
+                            未设置昵称
+                            <else/>
+                            {$user.nickname}
+                        </empty>
+                    </div>
+                    <div>ID:{$user.user_id}</div>
+                    <div><a onclick="return confirm('确认操作吗?')" href="{:url('/admin.forum/do_bindadmin',['id'=>$Request.get.id,'user_id'=>$user['user_id']])}">绑定</a>
+                    </div>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <nav class="mt-2">
+        {$users->render()|raw}
+    </nav>
+</empty>

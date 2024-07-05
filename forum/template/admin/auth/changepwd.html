@@ -1,0 +1,20 @@
+<layout name="layout/admin"/>
+<form action="{:request()->url()}" method="post" class="m-auto mt-5 col-4">
+    <fieldset>
+        <div class="mb-3">
+            <label for="old_password" class="form-label">当前密码</label>
+            <input type="password" class="form-control" name="old_password" id="old_password" required placeholder="请输入当前密码">
+        </div>
+        <div class="mb-3">
+            <label for="new_password" class="form-label">新密码</label>
+            <input type="password" class="form-control" name="new_password" id="new_password" required placeholder="请输入新密码">
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">确认密码</label>
+            <input type="password" class="form-control" name="confirm_password" id="confirm_password" required placeholder="请再次输入新密码">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">修改密码</button>
+        </div>
+    </fieldset>
+</form>

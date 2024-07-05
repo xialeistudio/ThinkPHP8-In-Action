@@ -1,0 +1,43 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item active" aria-current="page">版块管理</li>
+    </ol>
+</nav>
+<p class="text-start">
+    <a href="{:url('/admin.forum/add')}" class="btn btn-primary btn-sm px-4 rounded-pill">添加版块</a>
+</p>
+
+<empty name="list">
+    <p>暂时没有版块。</p>
+    <else/>
+    <div class="row">
+        <volist name="list" id="item">
+            <div class="col-md-4 d-flex align-items-start justify-content-between border rounded p-2">
+                <div class="me-2">
+                    <a href="{:url('/forum/show',['id'=>$item['forum_id']])}" target="_blank">
+                        <img src="{$item.logo}" width="64" class="media-object" alt="">
+                    </a>
+                </div>
+                <div class="flex-fill">
+                    <h4>
+                        {$item.title}
+                    </h4>
+                    <p>
+                        <eq name="item.status" value="1">
+                            <span class="badge text-bg-primary">启用</span>
+                            <else/>
+                            <span class="badge text-bg-danger">禁用</span>
+                        </eq>
+                        <br>
+                        {$item.desc} <br>
+                        主题: {$item.topic_count} 回复: {$item.thread_count} <br>
+                        <a href="{:url('/admin.forum/update',['id'=>$item['forum_id']])}">编辑</a>
+                        <a href="{:url('/admin.forum/admins',['id'=>$item['forum_id']])}">版主列表</a>
+                    </p>
+                </div>
+            </div>
+        </volist>
+    </div>
+</empty>

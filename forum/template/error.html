@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>错误提示</title>
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.min.css">
+    <script src="/static/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container mt-2 m-auto">
+    <div class="alert alert-danger">{$msg}</div>
+    <div class="text-center">
+        <empty name="callback">
+        <a href="javascript:history.go(-1)" class="btn btn-primary">确定</a>
+        <else/>
+        <a href="{$callback}" class="btn btn-primary">确定</a>
+        </empty>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<layout name="layout/main"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/')}">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{$forum.title}</li>
+    </ol>
+</nav>
+<h4>版块详情</h4>
+<div class="d-flex justify-content-between border rounded p-2">
+    <div class="me-2">
+        <img src="{$forum.logo|raw}" width="64" height="64" alt="">
+    </div>
+    <div class="flex-fill">
+        <div>{$forum.title}</div>
+        <div>{$forum.desc}</div>
+        <div>主题：{$forum.topic_count} 回复：{$forum.thread_count}</div>
+    </div>
+</div>
+<h4 class="mt-2">版主列表</h4>
+<empty name="admins">
+    <p>暂时没有版主</p>
+    <else/>
+    <div class="row">
+        <volist name="admins" id="admin">
+            <div class="d-flex justify-content-between border rounded p-2 col-3">
+                <div class="media-left">
+                    <img src="{$admin.user.avatar|raw}" width="40" height="40" class="media-object img-with-placeholder"
+                         alt="">
+                </div>
+                <div class="flex-fill">
+                    <empty name="admin.user.nickname">
+                        无昵称
+                        <else/>
+                        {$admin.user.nickname}
+                    </empty>
+                </div>
+            </div>
+        </volist>
+    </div>
+</empty>
+<h4 class="mt-2">主题列表</h4>
+<p>
+    <a href="{:url('/topic/publish',['forum_id'=>$forum['forum_id']])}" class="btn btn-primary">发帖</a>
+</p>
+<empty name="topics">
+    <p>暂时没有帖子</p>
+    <else/>
+    <table class="table">
+        <tr>
+            <td width="60%">标题</td>
+            <td width="25%">作者</td>
+            <td width="15%">回复/查看</td>
+        </tr>
+        <volist name="topics" id="topic">
+            <tr>
+                <td>
+                    <a href="{:url('/topic/show',['id'=>$topic['topic_id']])}">
+                        <eq name="topic.top" value="1">
+                            <strong class="text-danger">[置顶]</strong>
+                        </eq>
+                        {$topic.title}
+                    </a>
+                </td>
+                <td>
+                    <empty name="topic.user.nickname">
+                        无昵称
+                        <else/>
+                        {$topic.user.nickname}
+                    </empty>
+                    <br>
+                    {$topic.created_at}
+                </td>
+                <td>{$topic.reply_count}/{$topic.view_count}</td>
+            </tr>
+        </volist>
+    </table>
+    <nav class="mt-2">
+        {$topics->render()|raw}
+    </nav>
+</empty>

@@ -1,0 +1,62 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item active" aria-current="page">用户管理</li>
+    </ol>
+</nav>
+<div class="d-flex align-items-center justify-content-between mt-2">
+    <form action="" class="row flex-fill" method="get">
+        <div class="col">
+            <input type="search" class="form-control" placeholder="昵称模糊搜索" id="keyword" name="keyword"
+                   value="{$Request.get.keyword|raw}">
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-pill px-4" type="submit">筛选</button>
+            <a class="btn btn-secondary rounded-pill" href="<?=url('/admin.user/index')?>">所有用户</a>
+        </div>
+    </form>
+</div>
+<hr>
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>账号</td>
+        <td>昵称</td>
+        <td>头像</td>
+        <td>注册时间</td>
+        <td>最后登录</td>
+        <td>积分</td>
+        <td>帖子</td>
+    </tr>
+    <volist name="list" id="item">
+        <tr>
+            <td>{$item.user_id}</td>
+            <td>{$item.username}</td>
+            <td>
+                <empty name="item.nickname">
+                    无昵称
+                    <else/>
+                    {$item.nickname}
+                </empty>
+            </td>
+            <td>
+                <img src="{$item.avatar|raw}" class="img-with-placeholder" width="32" height="32" alt="">
+            </td>
+            <td>{$item.created_at}</td>
+            <td>
+                <empty name="item.login_at">
+                    未登录
+                    <else/>
+                    {$item.login_at|date='Y-m-d H:i:s'} <br>
+                    {$item.login_ip}
+                </empty>
+            </td>
+            <td>{$item.score}</td>
+            <td>{$item.thread_count}</td>
+        </tr>
+    </volist>
+</table>
+<nav class="mt-2">
+    {$list->render()|raw}
+</nav>

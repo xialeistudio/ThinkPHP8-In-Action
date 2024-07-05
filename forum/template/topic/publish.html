@@ -1,0 +1,33 @@
+<layout name="layout/main"/>
+<link rel="stylesheet" href="/static/richtexteditor/rte_theme_default.css"/>
+<script type="text/javascript" src="/static/richtexteditor/rte.js"></script>
+<script type="text/javascript" src='/static/richtexteditor/plugins/all_plugins.js'></script>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/')}">首页</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/forum/show',['id'=>$forum['forum_id']])}">{$forum.title}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">发表帖子</li>
+    </ol>
+</nav>
+<form action="{:url('/topic/do_publish')}" method="post" class="mt-2">
+    <input type="hidden" name="forum_id" value="{$forum.forum_id}">
+    <div class="mb-3">
+        <label for="title" class="form-label">标题</label>
+        <input type="text" class="form-control" id="title" name="title" required placeholder="100字以内">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">内容</label>
+        <textarea name="content" id="content" required class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <input type="checkbox" name="flag" id="flag" value="1" class="form-check-input">
+        <label for="flag" class="form-check-label">回复后可见</label>
+    </div>
+    <button type="submit" class="btn btn-primary px-4 rounded-pill">发布</button>
+</form>
+<script src="/static/js/site.js"></script>
+<script>
+    var editor1cfg = {}
+    editor1cfg.toolbar = "basic";
+    var editor1 = new RichTextEditor("#content", editor1cfg);
+</script>

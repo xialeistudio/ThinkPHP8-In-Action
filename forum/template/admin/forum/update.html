@@ -1,0 +1,36 @@
+<layout name="layout/admin"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/admin.forum/index')}">版块管理</a></li>
+        <li class="breadcrumb-item active" aria-current="page">编辑版块</li>
+    </ol>
+</nav>
+
+<form action=""  method="post" class="col-4" enctype="multipart/form-data">
+    <input type="hidden" name="logo" value="{$forum.logo}">
+    <div class="mb-3">
+        <label for="title" class="form-label">名称</label>
+        <input type="text" class="form-control" value="{$forum.title}" name="title" id="title" required placeholder="请输入版块名称"
+               maxlength="20">
+    </div>
+    <div class="mb-3">
+        <label for="logo" class="form-label">LOGO</label>
+        <img src="{$forum.logo}" width="64" class="mb-1">
+        <input type="file" class="form-control" name="logo" id="logo" placeholder="请上传LOGO"
+               maxlength="20">
+    </div>
+    <div class="mb-3">
+        <label for="desc" class="form-label">简介</label>
+        <textarea class="form-control" name="desc" id="desc" required placeholder="请输入版块简介"
+                  maxlength="100">{$forum.desc}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">状态</label>
+        <select name="status" id="status" required class="form-control">
+            <option value="1" <eq name="forum.status" value="1">selected</eq>>启用</option>
+            <option value="0" <eq name="forum.status" value="0">selected</eq>>禁用</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
