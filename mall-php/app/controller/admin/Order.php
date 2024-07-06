@@ -35,4 +35,20 @@ class Order extends BaseController
             return $this->error($e->getMessage());
         }
     }
+
+    public function show()
+    {
+        if($this->isAdminGuest()) {
+            return $this->adminLoginRequired();
+        }
+        $id = $this->request->get('id');
+        try {
+            $order = OrderService::Factory()->show($id);
+            return view('show', [
+                'order' => $order
+            ]);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
 }

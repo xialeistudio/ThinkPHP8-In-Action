@@ -26,6 +26,7 @@ use think\Model;
  */
 class Order extends Model
 {
+    protected $pk = 'order_id';
     const STATUS_CREATED = 0; // 已下单
     const STATUS_PAYED = 1; // 已支付
     protected $autoWriteTimestamp = true;
