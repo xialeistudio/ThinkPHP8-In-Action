@@ -1,0 +1,54 @@
+<layout name="layout/main"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin.index/index')}">管理后台</a></li>
+        <li class="breadcrumb-item active" aria-current="page">商品管理</li>
+    </ol>
+</nav>
+
+<p>
+    <a href="{:url('/admin.goods/publish')}" class="btn btn-sm btn-primary rounded-pill px-4">发布商品</a>
+</p>
+
+<table class="mt-2 table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>图片</th>
+        <th>价格</th>
+        <th>库存</th>
+        <th>状态</th>
+        <th>添加时间</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="list" id="item">
+    <tr>
+        <td>{$item.id}</td>
+        <td>{$item.title}</td>
+        <td>
+            <img src="{$item.thumb}" width="32" height="32" alt="">
+        </td>
+        <td>￥{$item.price}</td>
+        <td>{$item.stock}</td>
+        <td>
+            <eq name="item.status" value="1">
+            <span class="label label-success">上架</span>
+            <else/>
+            <span class="label label-danger">下架</span>
+            </eq>
+        </td>
+        <td>{$item.created_at}</td>
+        <td>{$item.updated_at}</td>
+        <td>
+            <a href="{:url('/admin.goods/update',['id'=>$item['id']])}">编辑</a>
+            <a onclick="return confirm('确定删除吗?')" href="{:url('/admin.goods/do_delete',['id'=>$item['id']])}" class="text-danger">删除</a>
+        </td>
+    </tr>
+    </volist>
+    </tbody>
+</table>
+{$list->render()|raw}

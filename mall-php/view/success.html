@@ -1,0 +1,7 @@
+<layout name="layout/simple"/>
+<div class="alert alert-success">{$msg}</div>
+<empty name="callback">
+    <p><a class="btn btn-primary" href="javascript:history.go(-1)">返回</a></p>
+    <else/>
+    <p><a class="btn btn-primary" href="{$callback}">返回</a></p>
+</empty>
