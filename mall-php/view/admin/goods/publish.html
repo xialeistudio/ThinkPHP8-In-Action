@@ -1,0 +1,49 @@
+<layout name="layout/main"/>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{:url('/admin.index/index')}">管理后台</a></li>
+        <li class="breadcrumb-item"><a href="{:url('/admin.goods/index')}">商品管理</a></li>
+        <li class="breadcrumb-item active" aria-current="page">发布商品</li>
+    </ol>
+</nav>
+
+
+<form action="{:url('do_publish')}" method="post" class="col-4" enctype="multipart/form-data">
+    <fieldset>
+        <div class="mb-3">
+            <label for="title" class="form-label">名称</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="商品名称" required maxlength="40">
+        </div>
+        <div class="mb-3">
+            <label for="thumb" class="form-label">缩略图</label>
+            <input type="file" name="thumb" class="form-control" id="thumb" required accept="image/*">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">简介(选填)</label>
+            <textarea name="description" id="description" class="form-control" rows="4" placeholder="100字以内"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">价格(元)</label>
+            <input placeholder="商品价格" type="number" step="0.01" class="form-control" id="price" name="price" required min="0"
+                   max="9999">
+        </div>
+        <div class="mb-3">
+            <label for="stock" class="form-label">库存</label>
+            <input placeholder="商品库存" type="number" class="form-control" name="stock" id="stock" required>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">商品状态</label>
+            <select name="status" id="status" class="form-control">
+                <option value="1" selected>上架</option>
+                <option value="0">下架</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">详情内容</label>
+            <textarea name="content" id="content" class="form-control" required rows="4" placeholder="商品详细介绍"></textarea>
+        </div>
+        <div class="text-start">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </fieldset>
+</form>
