@@ -4,7 +4,7 @@ CREATE TABLE `book_admin`
     `username`   varchar(20) NOT NULL UNIQUE,
     `password`   varchar(255) NOT NULL,
     `created_at` int NOT NULL,
-    `login_at`   int NOT NULL,
+    `login_at`   int NOT NULL DEFAULT 0,
     `login_ip`   varchar(15) DEFAULT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
